@@ -4,7 +4,35 @@ const app = express()
 
 app.set('view engine', 'ejs')
 
-app.get('/', function (req, res) {
+
+
+app.use(function (req, res, next) {
+
+    req.data = 'this is a data'
+    console.log('this is a global middleware')
+
+    next()
+})
+
+/* 
+
+global middleware
+route specific middleware
+
+*/
+
+
+
+app.get('/', function (req, res, next) {
+
+    console.log('this is a route "/" specific middleware')
+    next()
+
+}, function (req, res) {
+
+
+    console.log(req.data)
+
 
     res.render('index', {
         username: "john",
@@ -13,18 +41,24 @@ app.get('/', function (req, res) {
 })
 
 
-app.get('/about', function (req, res) {
-    res.send('about')
-})
+app.get('/about',
+
+    function (req, res, next) {
+
+        console.log('this is a route "/about" specific middleware')
+        next()
+    },
+
+    function (req, res) {
+        res.send('about')
+    })
 
 app.get('/profile', function (req, res) {
 
     /* 
-    
     req.query
     req.params
     req.body
- 
     */
 
     res.json({
