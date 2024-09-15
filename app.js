@@ -18,7 +18,20 @@ app.get('/about', function (req, res) {
 })
 
 app.get('/profile', function (req, res) {
-    res.send('profile')
+
+    /* 
+    
+    req.query
+    req.params
+    req.body
+ 
+    */
+
+    res.json({
+        name: 'John',
+        age: 20,
+        email: 'john@gmail.com',
+    })
 })
 
 app.listen(3000, function () {
