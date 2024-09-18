@@ -7,9 +7,56 @@
         content="width=device-width, initial-scale=1.0"
     >
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+    </style>
+
+
 </head>
 <body>
-    <h1>Hello <%= username %></h1>
-    <p>your age is <%= age %> </p>
+    <main class="h-screen w-screen flex flex-col items-center p-5">
+        <form
+            class="flex flex-col gap-3"
+            action="/create-note"
+            method="post"
+        >
+            <input
+                type="text"
+                name="title"
+                placeholder="Enter note title"
+                class="p-2 rounded-md border border-gray-300 outline-none"
+            >
+            <input
+                type="text"
+                name="description"
+                placeholder="Enter note description"
+                class="p-2 rounded-md border border-gray-300 outline-none"
+            >
+            <button class="p-2 bg-blue-500 text-white rounded-md">create note</button>
+        </form>
+
+        <div class="notes mt-3 w-full p-5 flex gap-2">
+
+            <% notes.forEach(function(note){ %>
+            <div class="note max-w-[300px] bg-gray-200 p-2 rounded-sm">
+                <h1 class="font-bold test-lg"><%= note.title %> </h1>
+                <p class="text-sm"><%= note.description %></p>
+            </div>
+            <% })%>
+        </div>
+
+    </main>
 </body>
 </html>
