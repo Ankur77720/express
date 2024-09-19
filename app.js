@@ -13,10 +13,14 @@ app.get('/', (req, res) => {
 })
 
 app.post('/create-note', (req, res) => {
-
-    notes.push(req.body)
-    console.log(notes)
-    res.redirect('/')
+    try {
+        notes.push(req.body)
+        console.log(notes)
+        res.redirect('/')
+    } catch (err) {
+        console.log(err)
+        res.send("internal error")
+    }
 })
 
 
